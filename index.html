@@ -2439,7 +2439,7 @@ $("rptCopy").onclick = () => {
 };
 
 /* ---------- cloud sync: progress goes to the organiser's Google Sheet (only after the learner agrees) ---------- */
-const SYNC_EXEC = "";           /* Google Apps Script /exec link; empty = sync off */
+const SYNC_EXEC = "https://script.google.com/macros/s/AKfycbxifwUNdhjjJPiKpqQtRWXgAc3qcKGgaW1ifNb2ltbQWK3bjcWdQB5I9WYE-X4q3_w/exec";           /* Google Apps Script /exec link; empty = sync off */
 const SYNC_URL = /claude(usercontent)?\.(ai|com)$/.test(location.hostname) ? "" : SYNC_EXEC;   /* claude.ai copies cannot send data out */
 const SYNC_KEY = "esc-2026";
 let SY = {};
@@ -2474,6 +2474,8 @@ function syncNow(beacon){
   clearTimeout(syncT);
   const body = JSON.stringify(syncPayload());
   if(body === SY.lastBody && Date.now() - (SY.at || 0) < 6 * 3600e3) return;   /* nothing new */
+  const gap = Date.now() - (SY.at || 0);
+  if(gap < 25000){ if(!beacon) syncSoon(25000 - gap); return; }   /* the sheet accepts one update per phone every 20 s */
   const done = () => { SY.lastBody = body; SY.at = Date.now(); SY.err = 0; saveSY(); renderSync(); };
   try {
     if(beacon && navigator.sendBeacon && navigator.sendBeacon(SYNC_URL, new Blob([body], {type:"text/plain"}))) return done();
