@@ -2439,7 +2439,7 @@ $("rptCopy").onclick = () => {
 };
 
 /* ---------- cloud sync: progress goes to the organiser's Google Sheet (only after the learner agrees) ---------- */
-const SYNC_EXEC = "https://script.google.com/macros/s/AKfycbxifwUNdhjjJPiKpqQtRWXgAc3qcKGgaW1ifNb2ltbQWK3bjcWdQB5I9WYE-X4q3_w/exec";           /* Google Apps Script /exec link; empty = sync off */
+const SYNC_EXEC = "https://script.google.com/macros/s/AKfycbzL_2pNJ72re15xXLrZWPlKCFn6OWtgW8B9KKWG2LCKkc0ZYBQc6xNu0xIyoNjGFA/exec";           /* Google Apps Script /exec link; empty = sync off */
 const SYNC_URL = /claude(usercontent)?\.(ai|com)$/.test(location.hostname) ? "" : SYNC_EXEC;   /* claude.ai copies cannot send data out */
 const SYNC_KEY = "esc-2026";
 let SY = {};
