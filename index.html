@@ -2509,7 +2509,7 @@ function renderSync(){
   if(!SYNC_URL){ el.innerHTML = `<span>📱</span><span><b>进度保存在这台手机上</b>不用登录。想让家人或老师看到，请用下面的“📤 把进度发给家人 / 老师”。</span>`; return; }
   if(syncOn()){
     const at = SY.at ? new Date(SY.at) : null, when = at ? `${at.getMonth()+1}月${at.getDate()}日 ${String(at.getHours()).padStart(2,"0")}:${String(at.getMinutes()).padStart(2,"0")}` : "等一下就会同步";
-    el.innerHTML = `<span>☁️</span><span><b>进度自动发给负责人（${esc(SY.name)}）</b>${SY.err && SY.err > (SY.at || 0) ? "⚠️ 上次没发出去，连上网络后会再试。" : "最近一次：" + when}<br><button class="linkbtn" type="button" id="syEdit">改名字</button> · <button class="linkbtn" type="button" id="syOff">不再发送</button></span>`;
+    el.innerHTML = `<span>☁️</span><span><b>进度自动发给负责人（${esc(SY.name)}）</b>${SY.err && SY.err > (SY.at || 0) ? "⚠️ 上次没发出去，连上网络后会再试。" : "最近一次：" + when}<br><button class="linkbtn" type="button" id="syNow">☁️ 现在同步</button> · <button class="linkbtn" type="button" id="syEdit">改名字</button> · <button class="linkbtn" type="button" id="syOff">不再发送</button></span>`;
   } else {
     el.innerHTML = `<span>📱</span><span><b>进度只保存在这台手机上</b>负责人看不到你的进度。<br><button class="linkbtn" type="button" id="syOn">☁️ 让负责人看到我的进度</button></span>`;
   }
@@ -2521,6 +2521,7 @@ syncSoon(4000);
 document.addEventListener("click", e => {
   if(e.target.closest("#syOn") || e.target.closest("#syEdit")) syncAsk(true);
   else if(e.target.closest("#syOff")){ SY.ok = false; saveSY(); renderSync(); }
+  else if(e.target.closest("#syNow")){ SY.lastBody = ""; SY.at = Math.min(SY.at || 0, Date.now() - 26000); saveSY(); syncNow(); const n = $("syNow"); if(n) n.textContent = "✓ 已发送"; }
 });
 
 /* ================= dialogue player ================= */
