@@ -64,6 +64,10 @@ header p{margin:4px 0 0;color:var(--muted);font-family:var(--f-zh);font-size:.95
 .ex-en{font-size:1.05rem}
 .kara-w{border-radius:6px;padding:0 3px;margin:0 -3px;transition:background-color .12s,color .12s;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .kara{display:inline}
+.num-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.num-opt{min-height:68px;border:1.5px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);font:700 1.45rem var(--f-en);cursor:pointer;font-variant-numeric:tabular-nums}
+.num-opt.right{background:var(--jade);border-color:var(--jade);color:#fff}
+.num-opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
 .sync-veil{position:fixed;inset:0;z-index:60;background:rgba(10,20,16,.55);display:flex;align-items:flex-end;justify-content:center;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
 .sync-pop{background:var(--surface);color:var(--ink);border-radius:20px;max-width:460px;width:100%;padding:20px 18px;display:flex;flex-direction:column;gap:10px;max-height:calc(100dvh - 32px);overflow:auto;box-shadow:0 10px 40px rgba(0,0,0,.25)}
 .sync-pop h3{margin:0;font:700 1.15rem var(--f-zh)}.sync-pop p{margin:0}.sync-em{font-size:2rem}
@@ -1346,6 +1350,156 @@ const DLG = [
   ]}
 ];
 
+/* ---------- Stage 5: work & life for new arrivals ---------- */
+const NEW_WORK = [
+ {id:"work1", zh:"上班第一天", en:"First day at work", stage:5, cards:[
+  ["supervisor","/ˈsuːpərvaɪzər/","主管","My supervisor is Ken.","我的主管是 Ken。","v 上牙轻咬下唇，不是 w。"],
+  ["colleague","/ˈkɒliːɡ/","同事","My colleague is very helpful.","我的同事很乐意帮忙。","重音在前面：COL-league，结尾 g 很轻。"],
+  ["staff pass","/stæf pæs/","员工证","Please wear your staff pass.","请戴上你的员工证。"],
+  ["uniform","/ˈjuːnɪfɔːrm/","制服","Where can I get my uniform?","我在哪里拿制服？"],
+  ["locker","/ˈlɒkər/","储物柜","This is your locker.","这是你的储物柜。"],
+  ["shift","/ʃɪft/","班次","My shift starts at eight.","我的班八点开始。","sh 像“嘘”，结尾 ft 要读出来。"],
+  ["night shift","/ˈnaɪt ʃɪft/","夜班","I work the night shift this week.","我这个星期上夜班。"],
+  ["break","/breɪk/","休息时间","We have a short break at ten.","我们十点有一个短暂休息。"],
+  ["lunch break","/ˈlʌntʃ breɪk/","午休","Lunch break is one hour.","午休一个小时。"],
+  ["clock in","/ˌklɒk ˈɪn/","打卡上班","Clock in with your staff pass.","用员工证打卡上班。"],
+  ["clock out","/ˌklɒk ˈaʊt/","打卡下班","Don't forget to clock out.","别忘了打卡下班。"],
+  ["overtime","/ˈoʊvərtaɪm/","加班","Can you work overtime tonight?","你今晚可以加班吗？","同事常简单说 OT（读 O-T）。"],
+  ["training","/ˈtreɪnɪŋ/","培训","Training is on Monday.","培训在星期一。"],
+  ["pantry","/ˈpæntri/","茶水间","You can eat in the pantry.","你可以在茶水间吃东西。"],
+  ["meeting","/ˈmiːtɪŋ/","会议","The meeting is at two.","会议两点开始。"],
+  ["roster","/ˈrɒstər/","排班表","Check the roster for next week.","看一下下星期的排班表。"]
+ ]},
+ {id:"safety", zh:"工作安全", en:"Safety at work", stage:5, cards:[
+  ["helmet","/ˈhelmɪt/","安全帽","Wear your helmet at all times.","一直要戴安全帽。"],
+  ["safety boots","/ˈseɪfti buːts/","安全鞋","Safety boots are a must here.","在这里一定要穿安全鞋。"],
+  ["gloves","/ɡlʌvz/","手套","Put on your gloves.","戴上手套。","v 上牙咬下唇，结尾 z 要振动。"],
+  ["mask","/mæsk/","口罩","Please wear a mask.","请戴口罩。"],
+  ["safety vest","/ˈseɪfti vest/","反光背心","Wear the safety vest on site.","在工地要穿反光背心。"],
+  ["Be careful!","/bi ˈkeərfəl/","小心！","Be careful! The floor is wet.","小心！地很滑。"],
+  ["Danger","/ˈdeɪndʒər/","危险","Danger! Do not touch.","危险！不要碰。"],
+  ["No entry","/ˌnoʊ ˈentri/","禁止进入","No entry. Staff only.","禁止进入，只限员工。"],
+  ["wet floor","/ˌwet ˈflɔːr/","地滑","Wet floor. Walk slowly.","地滑，慢慢走。"],
+  ["fire exit","/ˈfaɪər ˌeksɪt/","安全出口","The fire exit is on the left.","安全出口在左边。"],
+  ["fire extinguisher","/ˈfaɪər ɪkˌstɪŋɡwɪʃər/","灭火器","The fire extinguisher is near the door.","灭火器在门旁边。"],
+  ["first aid","/ˌfɜːrst ˈeɪd/","急救","Where is the first aid box?","急救箱在哪里？"],
+  ["I'm hurt","/aɪm hɜːrt/","我受伤了","I'm hurt. I cut my hand.","我受伤了，我割到手了。","马上告诉主管，不要自己忍着。"],
+  ["ladder","/ˈlædər/","梯子","Please hold the ladder for me.","请帮我扶住梯子。"],
+  ["heavy","/ˈhevi/","重","This box is heavy. Can you help me?","这个箱子很重，你可以帮我吗？","v 上牙轻咬下唇。"],
+  ["accident","/ˈæksɪdənt/","意外","Report every accident to your supervisor.","每次发生意外都要报告主管。"]
+ ]},
+ {id:"pay", zh:"工资与假期", en:"Pay & leave", stage:5, cards:[
+  ["payslip","/ˈpeɪslɪp/","工资单","Check your payslip every month.","每个月都要检查工资单。"],
+  ["pay day","/ˈpeɪ deɪ/","发薪日","Pay day is on the seventh.","七号发工资。"],
+  ["overtime pay","/ˈoʊvərtaɪm peɪ/","加班费","Overtime pay is one and a half times.","加班费是一点五倍。"],
+  ["bonus","/ˈboʊnəs/","奖金","We get a bonus before Chinese New Year.","我们农历新年前有奖金。"],
+  ["annual leave","/ˌænjuəl ˈliːv/","年假","I have fourteen days of annual leave.","我有十四天年假。"],
+  ["medical leave","/ˌmedɪkəl ˈliːv/","病假","I need two days of medical leave.","我需要两天病假。"],
+  ["MC","/ˌem ˈsiː/","病假单","Please send me your MC.","请把你的病假单发给我。","MC = medical certificate，医生开的病假证明。"],
+  ["public holiday","/ˌpʌblɪk ˈhɒlədeɪ/","公共假期","Monday is a public holiday.","星期一是公共假期。"],
+  ["apply for leave","/əˌplaɪ fər ˈliːv/","请假","I want to apply for leave on Friday.","我想星期五请假。"],
+  ["bank account","/ˈbæŋk əˌkaʊnt/","银行户口","My salary goes into my bank account.","我的工资存进银行户口。"],
+  ["ATM","/ˌeɪ tiː ˈem/","提款机","Is there an ATM near here?","这附近有提款机吗？"],
+  ["PIN","/pɪn/","密码","Never tell anyone your PIN.","绝对不要把密码告诉任何人。","银行、警察都不会问你的密码。有人问，就是骗子。"],
+  ["send money home","/ˌsend ˌmʌni ˈhoʊm/","汇钱回家","I send money home every month.","我每个月汇钱回家。"],
+  ["deduction","/dɪˈdʌkʃən/","扣钱","Why is there a deduction on my payslip?","为什么我的工资单上有扣钱？"],
+  ["receipt","/rɪˈsiːt/","收据","Keep the receipt.","把收据留好。","p 不发音：re-SEET。"]
+ ]},
+ {id:"rent", zh:"租房住宿", en:"Renting a room", stage:5, cards:[
+  ["room","/ruːm/","房间","I rent a room in Jurong.","我在裕廊租了一个房间。"],
+  ["rent","/rent/","房租","The rent is six hundred dollars a month.","房租一个月六百块。"],
+  ["landlord","/ˈlændlɔːrd/","房东","Please call the landlord.","请打电话给房东。"],
+  ["deposit","/dɪˈpɒzɪt/","押金","The deposit is one month's rent.","押金是一个月的房租。"],
+  ["contract","/ˈkɒntrækt/","合约","Please read the contract first.","请先看清楚合约。","签名前一定要看懂。看不懂可以请人帮忙。"],
+  ["aircon","/ˈeərkɒn/","冷气","The aircon is not working.","冷气坏了。","新加坡人都说 aircon，标准说法是 air conditioner。"],
+  ["broken","/ˈbroʊkən/","坏了","The washing machine is broken.","洗衣机坏了。"],
+  ["leaking","/ˈliːkɪŋ/","漏水","The pipe is leaking.","水管漏水了。"],
+  ["repair","/rɪˈpeər/","修理","When can you repair it?","你什么时候可以修？"],
+  ["electricity bill","/ɪlekˈtrɪsəti bɪl/","电费单","How much is the electricity bill?","电费多少钱？"],
+  ["key","/kiː/","钥匙","I lost my key.","我的钥匙丢了。"],
+  ["laundry","/ˈlɔːndri/","洗衣服","I do my laundry on Sunday.","我星期天洗衣服。"],
+  ["quiet","/ˈkwaɪət/","安静","Please be quiet after ten.","十点以后请安静。","quiet（安静）和 quite（相当）很像，别弄混。"],
+  ["dormitory","/ˈdɔːrmətɔːri/","宿舍","I live in a dormitory.","我住在宿舍。","大家常简单说 dorm。"],
+  ["move in","/ˌmuːv ˈɪn/","搬进去","When can I move in?","我什么时候可以搬进去？"]
+ ]},
+ {id:"s-repair", zh:"听不懂怎么办", en:"When you don't understand", stage:5, sent:true, keys:["Sorry","again","slowly","mean","spell","write","show"],
+  intro:"听不懂一点也不丢脸！只要会说这几句，对方就会<b>说慢一点、再说一遍、写下来</b>给你看。<br>先说 <b>Sorry</b> 或 <b>Excuse me</b>，听起来更有礼貌。", cards:[
+  ["Sorry, can you say that again?","","对不起，可以再说一遍吗？","","","最常用的一句！一天说十次都没关系。"],
+  ["Can you speak slowly, please?","","可以说慢一点吗？"],
+  ["Sorry, I don't understand.","","对不起，我听不懂。"],
+  ["What does roster mean?","","roster 是什么意思？","","","听到不懂的词，就用 What does ___ mean? 来问。"],
+  ["How do you spell it?","","怎么拼？"],
+  ["Can you write it down, please?","","可以写下来吗？","","","地址、时间、电话号码，请对方写下来最保险。"],
+  ["Can you show me?","","可以做给我看吗？"],
+  ["Do you mean tomorrow?","","你是说明天吗？","","","不确定时，用 Do you mean ___? 确认一下。"],
+  ["My English is not very good.","","我的英语不太好。"],
+  ["One moment, please.","","请等一下。"]
+ ]},
+ {id:"s-work", zh:"跟主管说话", en:"Talking to your supervisor", stage:5, sent:true, keys:["finished","need","should","Is","made","sick","late","Can"],
+  intro:"上班时最常对主管说的话：<b>做完了</b>、<b>要帮忙</b>、<b>接下来做什么</b>、<b>请假</b>。<br>做错了要马上说 <b>Sorry, I made a mistake.</b> 主管会更信任你。", cards:[
+  ["I have finished.","","我做完了。","","","finished 结尾的 -ed 读轻轻的 t：fi-nisht。"],
+  ["I need help with this.","","这个我需要帮忙。"],
+  ["What should I do next?","","接下来我要做什么？"],
+  ["Is this correct?","","这样对吗？"],
+  ["Where should I put this?","","这个要放在哪里？"],
+  ["Sorry, I made a mistake.","","对不起，我做错了。"],
+  ["I'm sick today. I can't come to work.","","我今天生病了，不能来上班。","","","can't 的 t 很轻，但 a 要读长一点，别人才不会听成 can。"],
+  ["I will be late. The bus is late.","","我会迟到，巴士误点了。"],
+  ["Can I take leave next Friday?","","下星期五我可以请假吗？"],
+  ["Thank you for teaching me.","","谢谢你教我。"]
+ ]}
+];
+D.push(...NEW_WORK);
+
+const NEW_DLG = [
+ {id:"d-firstday", zh:"上班第一天", e:"💼", who:"主管 Ken", av:"👨‍💼", stage:5,
+  setup:"今天是你第一天上班。主管 Ken 带你认识环境，告诉你上班时间。",
+  tip:"第一天问问题很正常。没听清楚就说 <b>Sorry, can you say that again?</b>　<b>clock in</b> = 打卡上班，<b>pantry</b> = 茶水间。",
+  lines:[
+   {s:"them", en:"Hi, you must be Lin. I'm Ken, your supervisor.", zh:"你好，你一定是林吧。我是 Ken，你的主管。"},
+   {s:"me", en:"Hi Ken, nice to meet you.", zh:"你好 Ken，很高兴认识你。", wrong:[W("Hi Ken, goodbye.","刚见面不说再见。"), W("Yes, I am the supervisor.","你不是主管，Ken 才是。")]},
+   {s:"them", en:"Your shift starts at eight. Please don't be late.", zh:"你的班八点开始。请不要迟到。"},
+   {s:"me", en:"OK, eight o'clock. Where do I clock in?", zh:"好的，八点。我在哪里打卡？", wrong:[W("OK, eight dollars.","他说的是时间，不是价钱。"), W("Sorry, I am late.","你还没迟到。")]},
+   {s:"them", en:"Use your staff pass at the machine near the door.", zh:"用你的员工证，在门口旁边的机器打卡。"},
+   {s:"me", en:"Sorry, can you say that again?", zh:"对不起，可以再说一遍吗？", wrong:[W("Sorry, I am sick.","你没有生病，只是没听清楚。"), W("Yes, I like it.","没有请他再说一遍。")]},
+   {s:"them", en:"Sure. Use your staff pass, near the door.", zh:"好。用员工证，在门口旁边。"},
+   {s:"me", en:"I see. Thank you!", zh:"明白了，谢谢！", wrong:[W("I see. Good night!","早上上班不说晚安。"), W("I don't have a door.","没听懂他的意思。")]},
+   {s:"them", en:"Lunch break is at twelve, for one hour.", zh:"十二点午休，休息一个小时。"},
+   {s:"me", en:"OK. Where can I eat?", zh:"好的。我可以在哪里吃饭？", wrong:[W("OK. Where can I sleep?","上班时间不能睡觉哦。"), W("Twelve dollars, please.","他说的是时间，不是钱。")]},
+   {s:"them", en:"You can eat in the pantry.", zh:"你可以在茶水间吃。"},
+   {s:"me", en:"Great, thank you very much!", zh:"太好了，非常感谢！", wrong:[W("You're welcome.","他帮了你，你要说谢谢。"), W("I'm full, thank you.","他只是告诉你在哪里吃，没有请你吃。")]}
+  ]},
+ {id:"d-sick", zh:"打电话请病假", e:"🤒", who:"主管 Ken", av:"👨‍💼", stage:5,
+  setup:"早上你发烧了，打电话给主管，说今天不能上班。",
+  tip:"在新加坡请病假要有医生开的 <b>MC</b>（病假单）。打电话先说 <b>This is</b> + 你的名字，对方才知道是谁。",
+  lines:[
+   {s:"me", en:"Hello Ken, this is Lin.", zh:"你好 Ken，我是林。", wrong:[W("Hello Ken, I am Ken.","你是林，不是 Ken。"), W("Hello, how much is it?","这是买东西时问的。")]},
+   {s:"them", en:"Hi Lin. What's up?", zh:"你好林，什么事？"},
+   {s:"me", en:"I'm sick today. I have a fever.", zh:"我今天生病了，我发烧了。", wrong:[W("I'm happy today.","你生病了，不是开心。"), W("I have a fever tomorrow.","发烧是现在的事，要说 today。")]},
+   {s:"them", en:"Oh no. Did you see a doctor?", zh:"哎呀。你看医生了吗？"},
+   {s:"me", en:"Yes. The doctor gave me an MC for two days.", zh:"看了。医生给了我两天病假单。", wrong:[W("Yes, I am a doctor.","你不是医生。"), W("No, I want chicken rice.","和问题无关。")]},
+   {s:"them", en:"OK. Please send me a photo of your MC.", zh:"好。请把病假单拍照发给我。"},
+   {s:"me", en:"OK, I will send it now.", zh:"好的，我现在就发。", wrong:[W("OK, I will buy it now.","他要你发照片，不是买东西。"), W("No, thank you.","主管要求的东西，不能拒绝哦。")]},
+   {s:"them", en:"Take care and rest well.", zh:"保重，好好休息。"},
+   {s:"me", en:"Thank you. Sorry for the trouble.", zh:"谢谢。不好意思麻烦你了。", wrong:[W("You're welcome.","他关心你，你应该说谢谢。"), W("Nice to meet you.","你们早就认识了。")]}
+  ]},
+ {id:"d-repair", zh:"冷气坏了找房东", e:"❄️", who:"房东", av:"🧓", stage:5,
+  setup:"你房间的冷气坏了。你打电话给房东，请他找人来修。",
+  tip:"新加坡人说 <b>aircon</b>（冷气）。约时间说 <b>Can he come after six?</b>（他可以六点以后来吗？）。",
+  lines:[
+   {s:"me", en:"Hi, the aircon in my room is not working.", zh:"你好，我房间的冷气坏了。", wrong:[W("Hi, the aircon in my room is very nice.","坏了要说 not working。"), W("Hi, I want to buy an aircon.","你是要修，不是要买。")]},
+   {s:"them", en:"Oh, since when?", zh:"哦，从什么时候开始的？"},
+   {s:"me", en:"Since last night.", zh:"从昨天晚上开始。", wrong:[W("Since last year.","太久了！是昨晚才坏的。"), W("Six dollars.","他问的是时间，不是钱。")]},
+   {s:"them", en:"OK, I will call the repairman.", zh:"好，我叫修理工来。"},
+   {s:"me", en:"When will he come?", zh:"他什么时候来？", wrong:[W("Where will he come?","问时间要用 When，不是 Where。"), W("Who are you?","你知道他是房东。")]},
+   {s:"them", en:"Tomorrow afternoon, maybe two o'clock.", zh:"明天下午，大概两点。"},
+   {s:"me", en:"Sorry, I'm working then. Can he come after six?", zh:"不好意思，那时我在上班。他可以六点以后来吗？", wrong:[W("Sorry, I'm sleeping. Come at two.","前后矛盾，听起来很奇怪。"), W("Yes, I'm free all day.","你要上班，不是整天有空。")]},
+   {s:"them", en:"Can, can. I tell him come at seven.", zh:"可以，可以。我叫他七点来。", sg:"Sure. I'll ask him to come at seven."},
+   {s:"me", en:"Thank you so much!", zh:"太感谢了！", wrong:[W("Seven dollars? OK.","他说的是七点，不是七块钱。"), W("Goodbye, see you last night.","last night 是昨晚，不能说“昨晚见”。")]}
+  ]}
+];
+DLG.push(...NEW_DLG);
+
 const CLINIC = [
  {t:"th 和 s",ipa:"/θ/ /s/",m:["th","s"],p:"th：舌尖伸到上下牙之间吹气。s：牙齿合上，舌头藏在里面。中文没有 th，所以常把 think 读成 sink。",pairs:[["think","sink"],["thick","sick"],["mouth","mouse"]]},
  {t:"r 和 l",ipa:"/r/ /l/",m:["r","l"],p:"r：嘴唇微圆，舌头往后缩，不碰任何地方。l：舌尖顶住上牙后面。读错会把 rice（米饭）说成 lice（虱子）。",pairs:[["right","light"],["rice","lice"],["read","lead"]]},
@@ -1377,7 +1531,7 @@ function pickVoice(){
 if(synth){ pickVoice(); synth.onvoiceschanged = pickVoice; }
 
 /* ---------- recorded audio: works on every phone (iPhone, Xiaomi, Samsung…); phone voice is only a backup ---------- */
-const AUDIO_INDEX = "audio/index-dfb8b25f.json";   /* versioned names: a phone can never mix an old saved file with a new index */
+const AUDIO_INDEX = "audio/index-4ee15100.json";   /* versioned names: a phone can never mix an old saved file with a new index */
 const AUD = {idx:null, idxP:null, packs:{}, names:{}, bufs:{}, ctx:null, src:null, seq:0, fin:null};
 function audioCtx(){
   if(!AUD.ctx){ const C = window.AudioContext || window.webkitAudioContext; if(!C) return null; try { AUD.ctx = new C(); } catch(e){ return null; } }
@@ -1509,7 +1663,7 @@ function sayTTS(text, rate){
 function knownCount(t){ return groupStat(D[t].id).c[3]; }
 function renderTopics(){
   $("topics").innerHTML = D.map((t,i)=>
-    `<button class="topic" type="button" data-i="${i}" aria-pressed="${i===topic}">${t.stage === 2 ? "🇸🇬 " : t.stage === 3 ? "💬 " : ""}${t.zh}<small>${knownCount(i)}/${t.cards.length}</small></button>`).join("");
+    `<button class="topic" type="button" data-i="${i}" aria-pressed="${i===topic}">${t.stage === 2 ? "🇸🇬 " : t.stage === 3 ? "💬 " : t.stage === 5 ? "💼 " : ""}${t.zh}<small>${knownCount(i)}/${t.cards.length}</small></button>`).join("");
 }
 $("topics").addEventListener("click", e => {
   const b = e.target.closest(".topic"); if(!b) return;
@@ -1751,6 +1905,16 @@ const EMO = {
  "I went to the polyclinic yesterday.":"🏥","I ate chicken rice for lunch.":"🍗🍚","I had a fever last night.":"🤒🌙","We watched TV after dinner.":"📺",
  "She cooked noodles.":"🍜","I bought a new umbrella.":"☂️","It rained this morning.":"🌧️","I was tired yesterday.":"😪"
 };
+Object.assign(EMO, {   /* stage 5: work & life */
+ "supervisor":"👩‍💼","colleague":"🧑‍🤝‍🧑","staff pass":"🪪","uniform":"👕","locker":"🔐","shift":"🕗","night shift":"🌙","break":"☕","lunch break":"🍱",
+ "clock in":"⏰","clock out":"🏁","overtime":"⏳","training":"🎓","pantry":"🫖","meeting":"👥","roster":"📋",
+ "helmet":"⛑️","safety boots":"🥾","gloves":"🧤","mask":"😷","safety vest":"🦺","Be careful!":"⚠️","Danger":"🛑","No entry":"⛔","wet floor":"💦",
+ "fire exit":"🚪🏃","fire extinguisher":"🧯","first aid":"🩹","I'm hurt":"🤕","ladder":"🪜","heavy":"🏋️","accident":"🚑",
+ "payslip":"🧾","pay day":"💵","overtime pay":"💰","bonus":"🎁","annual leave":"🏖️","medical leave":"🤒","MC":"📄","public holiday":"🎉",
+ "apply for leave":"📝","bank account":"🏦","ATM":"🏧","PIN":"🔢","send money home":"💸","deduction":"➖","receipt":"🧾",
+ "room":"🛏️","rent":"🏠","landlord":"🧓","deposit":"💳","contract":"📃","aircon":"❄️","broken":"🔧","leaking":"💧","repair":"🛠️",
+ "electricity bill":"💡","key":"🔑","laundry":"🧺","quiet":"🤫","dormitory":"🏢","move in":"📦"
+});
 function picHTML(p, cls){
   if(!p) return "";
   if(p.startsWith("sw:")) return `<span class="sw ${cls}" style="background:${p.slice(3)}"></span>`;
@@ -1970,7 +2134,8 @@ function showSpk(text){
     el.querySelector("#spkSlow").onclick = () => { const l = AUD.last; if(l) playClip(l.text, l.v, .5).then(ok => { if(!ok) sayTTS(l.text, .5); }); };
     el.querySelector("#spkHelp").onclick = () => { hideSpk(); const h = $("help"); h.open = true; ($("faqSound") || h).scrollIntoView({block:"center"}); };
   }
-  el.querySelector(".sp-word").textContent = String(text).trim();
+  const quizzing = opts.mode === "games" || opts.mode === "test";   /* never show the answer while it is being tested */
+  el.querySelector(".sp-word").textContent = quizzing ? "🔊 …" : String(text).trim();
   el.classList.remove("done"); el.querySelector(".sp-lbl").textContent = "正在朗读";
   el.querySelector("#spkSlow").hidden = !findClip(String(text), (AUD.last || {}).v || "L", .5);
   el.hidden = false;
@@ -2367,7 +2532,8 @@ const STAGES = [
   {zh:"基础入门", d:"常用词、数字、家人，以及 26 个字母的声音。", units:[...D.filter(t => !t.stage).map(t => ({g:t.id, zh:t.zh, w:1})), ...PH.map((L, i) => ({g:L.id, zh:L.zh, p:i}))]},
   {zh:"新加坡生活词汇", d:"在小贩中心、商店、诊所、地铁用得上的词。", units: D.filter(t => t.stage === 2).map(t => ({g:t.id, zh:t.zh, w:1}))},
   {zh:"简单句型", d:"把词组成句子：I want… / Can I…? / Where is…?", units: D.filter(t => t.stage === 3).map(t => ({g:t.id, zh:t.zh, w:1}))},
-  {zh:"情景对话", d:"两个人的对话，你来演其中一个人。", units: DLG.map((d, i) => ({g:d.id, zh:d.zh, t:i}))},
+  {zh:"情景对话", d:"两个人的对话，你来演其中一个人。", units: DLG.map((d, i) => ({g:d.id, zh:d.zh, t:i, st:d.stage})).filter(u => !u.st)},
+  {zh:"工作与生活", d:"刚来新加坡工作：上班、安全、工资、租房，还有听不懂时怎么办。", units:[...D.filter(t => t.stage === 5).map(t => ({g:t.id, zh:t.zh, w:1})), ...DLG.map((d, i) => ({g:d.id, zh:d.zh, t:i, st:d.stage})).filter(u => u.st === 5)]},
   {zh:"听懂日常", d:"听懂正常速度的标准英语：广播、店员、电话。", soon:["地铁和巴士广播","店员和服务员说的话","电话和语音留言","看懂告示和标志","常听到的本地说法（听懂就好）"]}
 ];
 const unitPct = g => { const s = groupStat(g); return s.n ? s.sum / (s.n * 3) : 0; };
@@ -2410,6 +2576,7 @@ function gameLine(){
   if(b.pdk) p.push(`英语跑得快 ${b.pdk} 分`);
   if(b.bj) p.push(`英语 21 点 ${b.bj} 筹码`);
   if(b.quick) p.push(`快速应答 ${b.quick} 分`);
+  if(b.num) p.push(`听数字 ${b.num} 分`);
   return p.length ? `🎮 游戏最好成绩：${p.join("、")}` : "";
 }
 function reportText(){
@@ -2729,7 +2896,7 @@ function renderGameHub(){
   $("gameHub").innerHTML = `
     <p class="hint">👉 选一个游戏。每个游戏练不同的本领，答对答错都会记进“进度”。</p>
     <div class="panel"><p class="sub" style="margin:0">麻将和抢答用哪些词？</p>
-      <div class="chips" id="gScope">${[{id:"learned", zh:`⭐ 我学过的（${learned}）`}, ...scopeTopics().map(t => ({id:t.id, zh:(t.stage === 2 ? "🇸🇬 " : "") + t.zh}))]
+      <div class="chips" id="gScope">${[{id:"learned", zh:`⭐ 我学过的（${learned}）`}, ...scopeTopics().map(t => ({id:t.id, zh:(t.stage === 2 ? "🇸🇬 " : t.stage === 5 ? "💼 " : "") + t.zh}))]
         .map(c => `<button class="topic" type="button" data-scope="${c.id}" aria-pressed="${c.id === gScope}">${c.zh}</button>`).join("")}</div>
       ${gScope === "learned" && learned < 10 ? `<p class="desc">你学过的词还不多，游戏会先用最基础的词。</p>` : ""}</div>
     <div class="g-cards">
@@ -2745,6 +2912,9 @@ function renderGameHub(){
       <div class="g-card"><div class="g-top"><span class="g-em" aria-hidden="true">⚡</span><div><h3>快速应答</h3><span class="g-skill">练：听懂了马上回答</span></div></div>
         <p>60 秒内，别人说一句，你马上选出最合适的回答，就像真的聊天。答错扣 5 秒。</p><span class="g-best">${best(b.quick && b.quick + " 分")}</span>
         <button class="btn btn-play" type="button" data-game="quick">▶ 开始</button></div>
+      <div class="g-card"><div class="g-top"><span class="g-em" aria-hidden="true">🔢</span><div><h3>听数字</h3><span class="g-skill">练：听懂价钱、时间、电话号码</span></div></div>
+        <p>听一个价钱、时间、电话、日期或巴士号码，点出你听到的那个。13 还是 30？最考耳朵！</p><span class="g-best">${best(b.num && b.num + " 分")}</span>
+        <button class="btn btn-play" type="button" data-game="num">▶ 开始</button></div>
       <div class="g-card"><div class="g-top"><span class="g-em" aria-hidden="true">🎈</span><div><h3>听音抢答</h3><span class="g-skill">练：听懂得快不快</span></div></div>
         <p>听到一个词，在气球飞走之前点对的那一个。越答越快！</p><span class="g-best">${best(b.balloon && b.balloon + " 分")}</span>
         <button class="btn btn-play" type="button" data-game="balloon">▶ 开始</button></div>
@@ -2934,6 +3104,62 @@ function endBalloon(){
   const right = G.n - G.missed.length;
   gameOver({head: G.hearts > 0 ? `完成！答对 ${right} / ${G.total}` : `心用完了，答对 ${right} 个`, score: G.score + " 分", newBest: nb && old > 0, bestText: old ? `最好成绩：${old} 分` : "",
     win: G.hearts === 3, missed: G.missed, note: G.hearts === 3 ? "一颗心都没丢，听力超棒！" : "把下面的词多听几次，再来挑战！", again: startBalloon});
+}
+
+const NUMQ = [{"k":"price","say":"Thirteen dollars fifty.","show":"$13.50","opts":["$13.50","$30.50","$13.15","$14.50"],"zh":"价钱"},{"k":"price","say":"Thirty dollars fifty.","show":"$30.50","opts":["$30.50","$13.50","$30.15","$31.50"],"zh":"价钱"},{"k":"price","say":"Fifteen dollars.","show":"$15.00","opts":["$15.00","$50.00","$15.10","$16.00"],"zh":"价钱"},{"k":"price","say":"Fifty dollars.","show":"$50.00","opts":["$50.00","$15.00","$50.10","$51.00"],"zh":"价钱"},{"k":"price","say":"Four dollars fifty.","show":"$4.50","opts":["$4.50","$4.15","$5.50","$4.55"],"zh":"价钱"},{"k":"price","say":"Fourteen dollars ninety.","show":"$14.90","opts":["$14.90","$40.90","$14.19","$15.90"],"zh":"价钱"},{"k":"price","say":"Forty dollars ninety.","show":"$40.90","opts":["$40.90","$14.90","$40.19","$41.90"],"zh":"价钱"},{"k":"price","say":"Seventeen dollars twenty.","show":"$17.20","opts":["$17.20","$70.20","$17.30","$18.20"],"zh":"价钱"},{"k":"price","say":"Seventy dollars twenty.","show":"$70.20","opts":["$70.20","$17.20","$70.30","$71.20"],"zh":"价钱"},{"k":"price","say":"Two dollars eighty.","show":"$2.80","opts":["$2.80","$2.18","$3.80","$2.85"],"zh":"价钱"},{"k":"price","say":"Nineteen dollars.","show":"$19.00","opts":["$19.00","$90.00","$19.10","$20.00"],"zh":"价钱"},{"k":"price","say":"Ninety dollars.","show":"$90.00","opts":["$90.00","$19.00","$90.10","$91.00"],"zh":"价钱"},{"k":"price","say":"Six dollars thirty.","show":"$6.30","opts":["$6.30","$6.13","$7.30","$6.35"],"zh":"价钱"},{"k":"price","say":"Sixteen dollars sixty.","show":"$16.60","opts":["$16.60","$60.60","$16.16","$17.60"],"zh":"价钱"},{"k":"price","say":"Sixty dollars fifteen.","show":"$60.15","opts":["$60.15","$16.15","$60.50","$61.15"],"zh":"价钱"},{"k":"price","say":"Eight dollars five.","show":"$8.05","opts":["$8.05","$8.15","$9.05","$8.10"],"zh":"价钱"},{"k":"time","say":"Two fifteen.","show":"2:15","opts":["2:15","2:50","3:15","2:45"],"zh":"时间"},{"k":"time","say":"Eight thirty.","show":"8:30","opts":["8:30","8:13","9:30","8:00"],"zh":"时间"},{"k":"time","say":"Seven forty-five.","show":"7:45","opts":["7:45","7:00","8:45","7:15"],"zh":"时间"},{"k":"time","say":"Ten fifty.","show":"10:50","opts":["10:50","10:15","11:50","10:20"],"zh":"时间"},{"k":"time","say":"Three forty.","show":"3:40","opts":["3:40","3:14","4:40","3:10"],"zh":"时间"},{"k":"time","say":"Eleven thirteen.","show":"11:13","opts":["11:13","11:30","12:13","11:43"],"zh":"时间"},{"k":"time","say":"Six thirty.","show":"6:30","opts":["6:30","6:13","7:30","6:00"],"zh":"时间"},{"k":"time","say":"Nine fourteen.","show":"9:14","opts":["9:14","9:40","10:14","9:44"],"zh":"时间"},{"k":"time","say":"Twelve o'clock.","show":"12:00","opts":["12:00","12:15","1:00","12:30"],"zh":"时间"},{"k":"time","say":"Four oh five.","show":"4:05","opts":["4:05","4:20","5:05","4:35"],"zh":"时间"},{"k":"phone","say":"Nine two six zero, one eight one five.","show":"9260 1815","opts":["9260 1815","9260 1185","9560 1815","9260 1819"],"zh":"电话号码"},{"k":"phone","say":"Nine one three one, eight six zero nine.","show":"9131 8609","opts":["9131 8609","9311 8609","9141 8609","9131 8605"],"zh":"电话号码"},{"k":"phone","say":"Eight zero eight two, four six two eight.","show":"8082 4628","opts":["8082 4628","8802 4628","8082 4028","8082 4928"],"zh":"电话号码"},{"k":"phone","say":"Eight eight one nine, zero nine three seven.","show":"8819 0937","opts":["8819 0937","8819 0973","8819 0437","8815 0937"],"zh":"电话号码"},{"k":"phone","say":"Nine five four three, two three one nine.","show":"9543 2319","opts":["9543 2319","9542 3319","9543 2819","9943 2319"],"zh":"电话号码"},{"k":"phone","say":"Eight one eight six, two five two seven.","show":"8186 2527","opts":["8186 2527","8186 5227","8286 2527","8186 2927"],"zh":"电话号码"},{"k":"phone","say":"Nine nine seven nine, seven one one four.","show":"9979 7114","opts":["9979 7114","9979 1714","9979 7124","9579 7114"],"zh":"电话号码"},{"k":"phone","say":"Nine four six five, zero seven five two.","show":"9465 0752","opts":["9465 0752","9465 0572","9965 0752","9469 0752"],"zh":"电话号码"},{"k":"date","say":"The thirteenth of May.","show":"13 May","opts":["13 May","30 May","13 Mar","30 Mar"],"zh":"日期"},{"k":"date","say":"The thirtieth of May.","show":"30 May","opts":["30 May","13 May","30 Mar","13 Mar"],"zh":"日期"},{"k":"date","say":"The fifteenth of June.","show":"15 Jun","opts":["15 Jun","5 Jun","15 Jul","5 Jul"],"zh":"日期"},{"k":"date","say":"The third of July.","show":"3 Jul","opts":["3 Jul","13 Jul","3 Jun","13 Jun"],"zh":"日期"},{"k":"date","say":"The twenty-first of January.","show":"21 Jan","opts":["21 Jan","20 Jan","21 Jun","20 Jun"],"zh":"日期"},{"k":"date","say":"The twelfth of March.","show":"12 Mar","opts":["12 Mar","2 Mar","12 May","2 May"],"zh":"日期"},{"k":"date","say":"The fourteenth of August.","show":"14 Aug","opts":["14 Aug","4 Aug","14 Oct","4 Oct"],"zh":"日期"},{"k":"date","say":"The fifth of November.","show":"5 Nov","opts":["5 Nov","15 Nov","5 Oct","15 Oct"],"zh":"日期"},{"k":"bus","say":"Bus one seven four.","show":"Bus 174","opts":["Bus 174","Bus 471","Bus 175","Bus 184"],"zh":"巴士号码"},{"k":"bus","say":"Bus six seven.","show":"Bus 67","opts":["Bus 67","Bus 76","Bus 68","Bus 77"],"zh":"巴士号码"},{"k":"bus","say":"Bus one nine zero.","show":"Bus 190","opts":["Bus 190","Bus 091","Bus 191","Bus 200"],"zh":"巴士号码"},{"k":"bus","say":"Bus five one eight.","show":"Bus 518","opts":["Bus 518","Bus 815","Bus 519","Bus 528"],"zh":"巴士号码"},{"k":"bus","say":"Bus eight eight.","show":"Bus 88","opts":["Bus 88","Bus 89","Bus 98","Bus 808"],"zh":"巴士号码"},{"k":"bus","say":"Bus nine six one.","show":"Bus 961","opts":["Bus 961","Bus 169","Bus 962","Bus 971"],"zh":"巴士号码"}];
+const NUM_ICON = {price:"💰", time:"🕒", phone:"📱", date:"📅", bus:"🚌"};
+/* ---------- 🔢 number listening: prices, times, phone numbers, dates, bus numbers ---------- */
+function startNum(){
+  stopGame();
+  const kinds = ["price","time","phone","date","bus"], deck = [];
+  const pools = Object.fromEntries(kinds.map(k => [k, shuffle(NUMQ.filter(q => q.k === k))]));
+  for(let r = 0; deck.length < 12; r++) for(const k of shuffle(kinds)) if(deck.length < 12 && pools[k][r]) deck.push(pools[k][r]);
+  G = {type:"num", deck: shuffle(deck), i:-1, hearts:3, score:0, right:0, miss:[], q:null};
+  gameFrame("🔢 听数字");
+  $("gBody").innerHTML = `<p class="hint">👉 听一个价钱、时间、电话号码、日期或巴士号码，点出你听到的那一个。13 和 30、15 和 50 最容易听错，注意听重音！</p>
+    <div class="g-prompt"><button class="btn btn-play btn-sm" type="button" id="nHear">🔊 再听一遍</button><button class="btn btn-ghost btn-sm" type="button" id="nSlow">🐢 慢速</button></div>
+    <div class="g-word" id="nKind" aria-live="polite"></div>
+    <div class="num-opts" id="nOpts"></div><div class="g-banner" id="nMsg" aria-live="polite"></div>`;
+  numStats();
+  const run = gameRun; setTimeout(() => { if(run === gameRun) numNext(); }, 600);
+}
+function numStats(){ $("gStats").innerHTML = `<span>${hearts(G.hearts)}</span><span>⭐ ${G.score}</span><span>${Math.min(G.i + 1, G.deck.length)}/${G.deck.length}</span>`; }
+function numNext(){
+  if(!G || G.type !== "num") return;
+  G.i++;
+  if(G.hearts <= 0 || G.i >= G.deck.length) return numEnd();
+  const q = G.deck[G.i];
+  G.q = {q, opts: shuffle(q.opts.slice()), done:false, replays:0};
+  $("nKind").textContent = `${NUM_ICON[q.k]} ${q.zh}`;
+  $("nOpts").innerHTML = G.q.opts.map((o, j) => `<button class="num-opt" type="button" data-no="${j}">${esc(o)}</button>`).join("");
+  $("nMsg").textContent = "";
+  $("nSlow").disabled = !!opts.gHard;
+  numStats(); say(q.say, .9);
+}
+function numAnswer(j, el){
+  const c = G.q; if(c.done) return; c.done = true;
+  const ok = c.opts[j] === c.q.show;
+  const btns = [...document.querySelectorAll("#nOpts .num-opt")];
+  btns.forEach(b => b.disabled = true);
+  btns[c.opts.indexOf(c.q.show)].classList.add("right");
+  if(ok){
+    const pts = (10 + (c.replays ? 0 : 5)) * gMul(); G.score += pts; G.right++; sfx("ok");
+    $("nMsg").textContent = c.replays ? `✅ 对了！ +${pts}` : `✅ 一次就听懂！ +${pts}`;
+  } else {
+    el.classList.add("wrong"); G.hearts--; G.miss.push(c.q); sfx("bad");
+    $("nMsg").textContent = `是 ${c.q.show}，再听一次 👂`;
+    setTimeout(() => say(c.q.say, .5), 300);
+  }
+  numStats();
+  const run = gameRun; setTimeout(() => { if(run === gameRun) numNext(); }, ok ? 1100 : 3200);
+}
+function numEnd(){
+  const old = GB().num || 0, nb = G.score > old; if(nb){ GB().num = G.score; save(); }
+  const miss = [...new Map(G.miss.map(q => [q.show, q])).values()];
+  gameOver({head: G.hearts > 0 ? `完成！答对 ${G.right} / ${G.deck.length}` : `心用完了，答对 ${G.right} 个`, score: G.score + " 分",
+    newBest: nb && old > 0, bestText: old ? `最好成绩：${old} 分` : "", win: G.hearts === 3,
+    note: miss.length ? `要多听的：${miss.map(q => `<button class="linkbtn" type="button" data-say="${esc(q.say)}">🔊 ${esc(q.show)}</button>`).join(" ")}` : "全部听对，数字耳朵很灵！",
+    again: startNum});
 }
 
 /* ---------- 🐝 spelling bee ---------- */
@@ -3532,7 +3758,7 @@ $("gamesMode").addEventListener("click", e => {
   const df = t.closest("[data-diff]"); if(df){ opts.gHard = df.dataset.diff === "hard"; save(); renderGameHub(); return; }
   const go = t.closest("[data-game]");
   if(go){ const g = go.dataset.game; audioCtx();
-    if(g === "mahjong") startMahjong(); else if(g === "pdk") startPDK(); else if(g === "bj") startBJ(); else if(g === "quick") startQuick(); else if(g === "balloon") startBalloon(); else if(g === "spell") startSpell(); else if(g === "hawker") startHawker();
+    if(g === "mahjong") startMahjong(); else if(g === "pdk") startPDK(); else if(g === "bj") startBJ(); else if(g === "quick") startQuick(); else if(g === "balloon") startBalloon(); else if(g === "spell") startSpell(); else if(g === "hawker") startHawker(); else if(g === "num") startNum();
     return; }
   if(t.closest("#gQuit") || t.closest("#gHub")){ hush(); renderGameHub(); return; }
   if(t.closest("#gAgain")){ const a = G && G.again; if(a) a(); return; }
@@ -3568,6 +3794,11 @@ $("gamesMode").addEventListener("click", e => {
     if(t.closest("#qkGo")){ t.closest("#qkGo").remove(); G.last = Date.now(); quickTick(); quickNext(); return; }
     if(t.closest("#qkHear")){ if(G.q) talkSay(G.q.prompt.en, "them", .8); return; }
     const o = t.closest("[data-qk]"); if(o && !o.disabled) quickAnswer(+o.dataset.qk, o); return;
+  }
+  if(G.type === "num"){
+    if(t.closest("#nHear")){ if(G.q){ if(opts.gHard && G.q.replays >= 1){ $("nMsg").textContent = "挑战模式只能再听一次"; return; } G.q.replays++; say(G.q.q.say, .9); } return; }
+    if(t.closest("#nSlow")){ if(G.q){ G.q.replays++; say(G.q.q.say, .5); } return; }
+    const o = t.closest("[data-no]"); if(o && !o.disabled && G.q && !G.q.done) numAnswer(+o.dataset.no, o); return;
   }
   if(G.type === "balloon"){
     if(t.closest("#bReplay")){ if(G.cur) say(G.cur.target.en, .8); return; }
